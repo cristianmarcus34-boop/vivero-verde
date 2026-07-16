@@ -1,65 +1,168 @@
-import Image from "next/image";
+import { productos } from '../data/productos'
+import TarjetaProducto from '../components/TarjetaProducto'
+import Link from 'next/link'
+import styles from './page.module.css'
 
-export default function Home() {
+export default function Inicio() {
+  const destacados = productos.slice(0, 4)
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroBackground}>
+          <div></div>
+          <div></div>
+        </div>
+        <div className={styles.heroContent}>
+          <div className={styles.heroIcon}>🌿</div>
+          <h1 className={styles.heroTitle}>
+            Bienvenido a <span>Vivero Verde</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className={styles.heroSubtitle}>
+            Encuentra las mejores plantas, macetas y accesorios para crear tu jardín perfecto
           </p>
+          <div className={styles.heroButtons}>
+            <Link href="/productos">
+              <button className={styles.btnPrimary}>🌱 Ver Productos</button>
+            </Link>
+            <Link href="/contacto">
+              <button className={styles.btnSecondary}>📞 Contacto</button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Productos Destacados */}
+      <section>
+        <div className={styles.sectionHeader}>
+          <div>
+            <h2 className={styles.sectionTitle}>🌱 Productos Destacados</h2>
+            <p className={styles.sectionSubtitle}>Lo más popular de nuestro vivero</p>
+          </div>
+          <Link href="/productos" className={styles.viewAll}>
+            Ver todos <span>→</span>
+          </Link>
         </div>
-      </main>
-    </div>
-  );
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {destacados.map((producto) => (
+            <TarjetaProducto key={producto.id} producto={producto} />
+          ))}
+        </div>
+      </section>
+
+      {/* Beneficios */}
+      <section>
+        <div className={styles.benefitsGrid}>
+          <div className={styles.benefitCard}>
+            <div className={styles.benefitIcon}>🌱</div>
+            <h3 className={styles.benefitTitle}>Plantas Saludables</h3>
+            <p className={styles.benefitDesc}>Cuidamos cada planta para que llegue en perfectas condiciones</p>
+            <div className={styles.benefitLine}></div>
+          </div>
+          
+          <div className={styles.benefitCard}>
+            <div className={styles.benefitIcon}>🚚</div>
+            <h3 className={styles.benefitTitle}>Envío Rápido</h3>
+            <p className={styles.benefitDesc}>Entregas a domicilio en 24-48 horas con el mayor cuidado</p>
+            <div className={styles.benefitLine}></div>
+          </div>
+          
+          <div className={styles.benefitCard}>
+            <div className={styles.benefitIcon}>💚</div>
+            <h3 className={styles.benefitTitle}>Asesoramiento</h3>
+            <p className={styles.benefitDesc}>Te ayudamos a elegir las mejores plantas para tu espacio</p>
+            <div className={styles.benefitLine}></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Estadísticas */}
+      <section className={styles.statsSection}>
+        <div className={styles.statsGrid}>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>500+</div>
+            <div className={styles.statLabel}>Plantas</div>
+          </div>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>50+</div>
+            <div className={styles.statLabel}>Macetas</div>
+          </div>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>1000+</div>
+            <div className={styles.statLabel}>Clientes felices</div>
+          </div>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>4.9⭐</div>
+            <div className={styles.statLabel}>Valoración</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonios */}
+      <section className={styles.testimonialsSection}>
+        <div className={styles.testimonialsHeader}>
+          <h2 className={styles.testimonialsTitle}>Lo que dicen nuestros clientes</h2>
+          <p className={styles.testimonialsSubtitle}>Experiencias reales de personas que confían en nosotros</p>
+        </div>
+        
+        <div className={styles.testimonialsGrid}>
+          <div className={styles.testimonialCard}>
+            <div className={styles.testimonialStars}>⭐⭐⭐⭐⭐</div>
+            <p className={styles.testimonialText}>"Las plantas llegaron en perfecto estado. La Monstera es hermosa."</p>
+            <div className={styles.testimonialAuthor}>
+              <div className={styles.testimonialAvatar}>👩</div>
+              <div>
+                <p className={styles.testimonialName}>María G.</p>
+                <p className={styles.testimonialDate}>Cliente desde 2024</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles.testimonialCard}>
+            <div className={styles.testimonialStars}>⭐⭐⭐⭐⭐</div>
+            <p className={styles.testimonialText}>"Excelente atención y asesoramiento. Me ayudaron a elegir las plantas perfectas."</p>
+            <div className={styles.testimonialAuthor}>
+              <div className={styles.testimonialAvatar}>👨</div>
+              <div>
+                <p className={styles.testimonialName}>Carlos R.</p>
+                <p className={styles.testimonialDate}>Cliente desde 2023</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className={styles.testimonialCard}>
+            <div className={styles.testimonialStars}>⭐⭐⭐⭐⭐</div>
+            <p className={styles.testimonialText}>"El envío fue súper rápido y las macetas son de muy buena calidad."</p>
+            <div className={styles.testimonialAuthor}>
+              <div className={styles.testimonialAvatar}>👩</div>
+              <div>
+                <p className={styles.testimonialName}>Laura F.</p>
+                <p className={styles.testimonialDate}>Cliente desde 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaBackground}>
+          <div></div>
+          <div></div>
+        </div>
+        <div className={styles.ctaContent}>
+          <div className={styles.ctaIcon}>🌿</div>
+          <h2 className={styles.ctaTitle}>¿Listo para empezar tu jardín?</h2>
+          <p className={styles.ctaText}>
+            Descubre nuestra colección de plantas, macetas y accesorios para crear el espacio verde que siempre soñaste
+          </p>
+          <Link href="/productos">
+            <button className={styles.ctaButton}>🌱 Explorar Productos</button>
+          </Link>
+        </div>
+      </section>
+    </>
+  )
 }
