@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import styles from './PiePagina.module.css'
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './PiePagina.module.css';
 
 export default function PiePagina() {
   return (
@@ -70,11 +71,33 @@ export default function PiePagina() {
         
         <hr className={styles.footerDivider} />
         
+        {/* FOOTER INFERIOR - MÁS GRANDE Y VISIBLE */}
         <div className={styles.footerBottom}>
           <p>© 2024 Vivero Verde. Todos los derechos reservados.</p>
-          <p>desarrollo agencia digital powa</p>
+          
+          <div className="flex flex-col items-center justify-center gap-1 mt-3 pt-3 border-t border-gray-700">
+            <span className="text-sm text-gray-400">Desarrollo:</span>
+            <a
+              href="https://agencia-powa.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:opacity-80 transition group"
+            >
+              <Image
+                src="/icons/logo-powa.png"
+                alt="Agencia Digital Powa"
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain group-hover:scale-110 transition"
+              />
+              <span className="text-lg font-bold text-white group-hover:text-blue-400 transition">
+                Agencia Digital Powa
+              </span>
+            </a>
+            <span className="text-xs text-gray-500">🚀 Transformamos ideas en productos digitales</span>
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
